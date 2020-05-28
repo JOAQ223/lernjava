@@ -1,4 +1,4 @@
-ackage javaapplication82;
+package javaapplication82;
 
 import java.util.Random;
 import static jdk.nashorn.tools.ShellFunctions.input;
