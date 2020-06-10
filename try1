@@ -1,0 +1,49 @@
+public class Hausubung1 {
+
+    public void EinzuFunf(int notes []) {
+      
+        
+        
+}
+    
+   public void LeerArchivo() throws FileNotFoundException, IOException{ 
+  
+      File archivo = new File("D:/Users/Home/Desktop/Notenliste.csv/");
+      FileReader fr = new FileReader(archivo);
+      BufferedReader bf = new BufferedReader(fr);
+      String linea;
+      while((linea = bf.readLine()) !=null){
+  System.out.print(linea);
+  
+  
+  
+  }
+  }
+    
+    public void leerArchivo2(){
+    
+        try{// intenta hacer
+            //todo lo que puede tener excepcion
+            LeerArchivo();
+        } catch (FileNotFoundException ex){ // en caso no suceda aquí es filenotfound  
+         //ex porque se encesita objeto
+           JOptionPane.showMessageDialog(null,"no se ha encontrado archivo");
+            }
+        catch (IOException df){
+             JOptionPane.showMessageDialog(null,"ha ocurrido exception verificada");
+        }
+        // si detecta , nos va a mostrar el tipo de exception , no se va aa frentar ,va acontinuar
+            
+                
+    }
+    
+    
+    
+    public static void main(String[] args) { 
+        
+       
+
+       
+    }
+    
+}
