@@ -1,12 +1,20 @@
+package haus1;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+/**
+ *
+ * @author Home
+ */
+public class Haus1 {
 
-public class CSVReader {
- // code example from https://www.codeflow.site/de/article/java__how-to-read-and-parse-csv-file-in-java
-    public static void main(String[]args) {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
 
-        String csvFile = "D:/Users/Home/Desktop/Notenliste.csv/"";
+
+        String csvFile = "D:/Users/Home/Desktop/Notenliste.csv/";
         String line = "";
         String cvsSplitBy = ",";
 
@@ -15,9 +23,9 @@ public class CSVReader {
             while ((line = br.readLine()) != null) {
 
                //use comma as separator
-                String[]country = line.split(cvsSplitBy);
+                String[] Note= line.split(cvsSplitBy);
 
-                System.out.println("Country[code= " + country[4]+ " , name=" + country[5]+ "]");
+                System.out.println("Country[code= " +Note[100]+ " , name=" + Note[100]+ "]");
 
             }
 
@@ -25,6 +33,9 @@ public class CSVReader {
             e.printStackTrace();
         }
 
+    }
+
+}
     }
 
 }
