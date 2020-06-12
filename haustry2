@@ -1,4 +1,246 @@
+package arraytwo;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Home
+ */
+public class Ubunghaus {
+
+    public  void HTML(){
+        String html = "<div><h1>GRA </h1><p>  </p>"
+                + "   <meta charset=\"utf-8\">\n" +
+"    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+"    <title>Gráfico de barras</title>\n" +
+"\n" +
+"    <style>\n" +
+"    .chart-wrap {\n" +
+"        --chart-width:420px;\n" +
+"        --grid-color:#aaa;\n" +
+"        --bar-color:#0080FF;\n" +
+"        --bar-thickness:20px;\n" +
+"        --bar-rounded: 3px;\n" +
+"        --bar-spacing:10px;\n" +
+"\n" +
+"        font-family:sans-serif;\n" +
+"        width:var(--chart-width);\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap .title{\n" +
+"        font-weight:bold;\n" +
+"        padding:1.8em 0;\n" +
+"        text-align:center;\n" +
+"        white-space:nowrap;\n" +
+"    }\n" +
+"\n" +
+"    /*  die Ideevon dem COde  kommt von  https://www.lawebdelprogramador.com/codigo/CSS/5294-Grafico-de-barras-utilizando-unicamente-HTML-y-CSS.html\n" +
+"    cuando definimos el gráfico en horizontal, lo giramos 90 grados */\n" +
+"    .chart-wrap.horizontal .grid{\n" +
+"\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap.horizontal .bar::after{\n" +
+"        /* giramos las letras para horizontal*/\n" +
+"\n" +
+"        padding-top:0px;\n" +
+"        display: block;\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap .grid{\n" +
+"        margin-left:50px;\n" +
+"        position:relative;\n" +
+"        padding:5px 0 5px 0;\n" +
+"        height:100%;\n" +
+"        width:100%;\n" +
+"        border-left:2px solid var(--grid-color);\n" +
+"    }\n" +
+"\n" +
+"    /* posicionamos el % del gráfico*/\n" +
+"    .chart-wrap .grid::before{\n" +
+"        font-size:0.8em;\n" +
+"        font-weight:bold;\n" +
+"        content:'0';\n" +
+"        position:absolute;\n" +
+"        left:-0.5em;\n" +
+"        top:-1.5em;\n" +
+"    }\n" +
+"    .chart-wrap .grid::after{\n" +
+"        font-size:0.8em;\n" +
+"        font-weight:bold;\n" +
+"        content:'100';\n" +
+"        position:absolute;\n" +
+"        right:-1.5em;\n" +
+"        top:-1.5em;\n" +
+"    }\n" +
+"\n" +
+"    /* giramos las valores de 0% y 100% para horizontal */\n" +
+"    .chart-wrap.horizontal .grid::before, .chart-wrap.horizontal .grid::after {\n" +
+"        transform: rotate(90deg);\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap .bar {\n" +
+"        width: var(--bar-value);\n" +
+"        height:var(--bar-thickness);\n" +
+"        margin:var(--bar-spacing) 0;\n" +
+"        background-color:var(--bar-color);\n" +
+"        border-radius:0 var(--bar-rounded) var(--bar-rounded) 0;\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap .bar:hover{\n" +
+"        opacity:0.8;\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap .bar::after{\n" +
+"        content:attr(data-name);\n" +
+"        margin-left:100%;\n" +
+"        padding:10px;\n" +
+"        display:inline-block;\n" +
+"        white-space:nowrap;\n" +
+"    }\n" +
+"\n" +
+"    </style>\n" +
+"</head>\n" +
+"<body>\n" +
+"\n" +
+"<div class=\"chart-wrap horizontal\">\n" +
+"  <div class=\"title\">Grafico </div>\n" +
+"\n" +
+"  <div class=\"grid\">\n" +
+"      <div class=\"bar\" style=\"--bar-value:13%;\" data-name=\"Note 1(13)\" title=\"\"></div>\n" +
+"      <div class=\"bar\" style=\"--bar-value:21%;\" data-name=\"Note 2(21)\" title=\"\"></div>\n" +
+"      <div class=\"bar\" style=\"--bar-value:24%;\" data-name=\"Note 3(24)\" title=\"\"></div>\n" +
+"      <div class=\"bar\" style=\"--bar-value:15%;\" data-name=\"Note 4(15)\" title=\"s%\"></div>\n" +
+"      <div class=\"bar\" style=\"--bar-value:25%;\" data-name=\"note 5(25)\" title=\"35%\"></div>\n" +
+""
+                + "</p> </div>/";
+    }
+    
+    public static void main(String[] args) {
+      Ubunghaus uno = new  Ubunghaus();
+         uno.HTML();
+          String html = "<div><h1> This ist test HTML </h1><p> this is a test paragrap for our html page  Die Note 1 gibt es 13 mal </p> Die Note 2 gibt es 21 mal\n" +
+                 "Die Note 3 gibt es 24 mal\n" +
+                "Die Note 4 gibt es 15 mal\n" +
+              "Die Note 5 gibt es 25 mal"
+                + "   <meta charset=\"utf-8\">\n" +
+"    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+"    <title>Gráfico de barras</title>\n" +
+"\n" +
+"    <style>\n" +
+"    .chart-wrap {\n" +
+"        --chart-width:420px;\n" +
+"        --grid-color:#aaa;\n" +
+"        --bar-color:#0080FF;\n" +
+"        --bar-thickness:20px;\n" +
+"        --bar-rounded: 3px;\n" +
+"        --bar-spacing:10px;\n" +
+"\n" +
+"        font-family:sans-serif;\n" +
+"        width:var(--chart-width);\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap .title{\n" +
+"        font-weight:bold;\n" +
+"        padding:1.8em 0;\n" +
+"        text-align:center;\n" +
+"        white-space:nowrap;\n" +
+"    }\n" +
+"\n" +
+"    /*  den COde  kommt von  https://www.lawebdelprogramador.com/codigo/CSS/5294-Grafico-de-barras-utilizando-unicamente-HTML-y-CSS.html\n" +
+"    cuando definimos el gráfico en horizontal, lo giramos 90 grados */\n" +
+"    .chart-wrap.horizontal .grid{\n" +
+"\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap.horizontal .bar::after{\n" +
+"        /* giramos las letras para horizontal*/\n" +
+"\n" +
+"        padding-top:0px;\n" +
+"        display: block;\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap .grid{\n" +
+"        margin-left:50px;\n" +
+"        position:relative;\n" +
+"        padding:5px 0 5px 0;\n" +
+"        height:100%;\n" +
+"        width:100%;\n" +
+"        border-left:2px solid var(--grid-color);\n" +
+"    }\n" +
+"\n" +
+"    /* posicionamos el % del gráfico*/\n" +
+"    .chart-wrap .grid::before{\n" +
+"        font-size:0.8em;\n" +
+"        font-weight:bold;\n" +
+"        content:'0';\n" +
+"        position:absolute;\n" +
+"        left:-0.5em;\n" +
+"        top:-1.5em;\n" +
+"    }\n" +
+"    .chart-wrap .grid::after{\n" +
+"        font-size:0.8em;\n" +
+"        font-weight:bold;\n" +
+"        content:'100';\n" +
+"        position:absolute;\n" +
+"        right:-1.5em;\n" +
+"        top:-1.5em;\n" +
+"    }\n" +
+"\n" +
+"    /* giramos las valores de 0% y 100% para horizontal */\n" +
+"    .chart-wrap.horizontal .grid::before, .chart-wrap.horizontal .grid::after {\n" +
+"        transform: rotate(90deg);\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap .bar {\n" +
+"        width: var(--bar-value);\n" +
+"        height:var(--bar-thickness);\n" +
+"        margin:var(--bar-spacing) 0;\n" +
+"        background-color:var(--bar-color);\n" +
+"        border-radius:0 var(--bar-rounded) var(--bar-rounded) 0;\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap .bar:hover{\n" +
+"        opacity:0.8;\n" +
+"    }\n" +
+"\n" +
+"    .chart-wrap .bar::after{\n" +
+"        content:attr(data-name);\n" +
+"        margin-left:100%;\n" +
+"        padding:10px;\n" +
+"        display:inline-block;\n" +
+"        white-space:nowrap;\n" +
+"    }\n" +
+"\n" +
+"    </style>\n" +
+"</head>\n" +
+"<body>\n" +
+"\n" +
+"<div class=\"chart-wrap horizontal\">\n" +
+"  <div class=\"title\">Grafico </div>\n" +
+"\n" +
+"  <div class=\"grid\">\n" +
+"      <div class=\"bar\" style=\"--bar-value:13%;\" data-name=\"Note 1(13)\" title=\"\"></div>\n" +
+"      <div class=\"bar\" style=\"--bar-value:21%;\" data-name=\"Note 2(21)\" title=\"\"></div>\n" +
+"      <div class=\"bar\" style=\"--bar-value:24%;\" data-name=\"Note 3(24)\" title=\"\"></div>\n" +
+"      <div class=\"bar\" style=\"--bar-value:15%;\" data-name=\"Note 4(15)\" title=\"s%\"></div>\n" +
+"      <div class=\"bar\" style=\"--bar-value:25%;\" data-name=\"note 5(25)\" title=\"35%\"></div>\n" +
+""
+                + "</p> </div>/";
+         
+        File f = new File("ejemplo.html");
+     try {
+         BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+     bw.write(html);
+     bw.close();
+     } catch (IOException e) {
+      e.printStackTrace();
         
+     }
         
    String filename= "D:/Users/Home/Desktop/Notenliste.csv/";
   ////get file
@@ -77,4 +319,10 @@
         }
         return max;
     }
-}
+    public static void html (int grades[]){
+         
+        
+    }
+    }
+
+
