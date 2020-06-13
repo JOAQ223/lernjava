@@ -1,0 +1,192 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package arraytwo;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Home
+ */
+public class Ubunghaus {
+    
+    public static int[] prozent (int [] Notas){
+        
+    int  [] prozente ={ 0, 0, 0, 0, 0};
+    for(int i=0;i<Notas.length;i++){
+            //die Anzahl der Studenten ist 100 
+          int suma =1;
+               suma = Notas[i] * 100  / (Notas.length * 20);
+               prozente[i] = suma;
+        
+        }
+        System.out.print(Arrays.toString(prozente));
+    
+     return prozente;}
+    
+    public  static void HTML(int Notas []  , int bestnote){
+        
+        /*  ein teil von dem Code kommt von https://canvasjs.com/html5-javascript-bar-chart/ */
+    String html = "<div><h1>  </h1><p>"+ "<meta charset=\"utf-8\">\n" +
+"  <html>\n" +
+"<head>\n" +
+"<script>\n" +
+"window.onload = function () {\n" +
+"\n" +
+"var chart = new CanvasJS.Chart(\"chartContainer\", {\n" +
+"	animationEnabled: true,\n"+
+"	title:{\n" +
+"		text:\"Auswertung\"\n" +
+"	},\n" +
+"	axisX:{\n" +
+"		interval: 1\n" +
+"	},\n" +
+"	axisY2:{\n" +
+"\n" +
+"		gridColor: \"rgba(1,77,101,.1)\",\n" +
+"\n" +
+"	},\n" +
+"	data: [{\n" +
+"		type: \"bar\",\n" +
+"		name: \"NOTEN\",\n" +
+"\n" +
+"		color: \"#014D65\",\n" +
+"		dataPoints: [\n" +
+"			{ y: "+Notas[0]+", label: \"note 1:13 \" },\n" +
+"			{ y: "+Notas[1]+", label: \"note 2: 21\" },\n" +
+"			{ y: "+Notas[2]+", label: \"note 3: 24\"},\n" +
+"			{ y: "+Notas[3]+", label: \"note 4: 15\" },\n" +
+"			{ y: "+Notas[4]+", label: \"note 5: 25\" },\n" +
+"		]\n" +
+"	}]\n" +
+"});\n" +
+"chart.render();\n" +
+"\n" +
+"}\n" +
+"</script>\n" +
+"</head>\n" +
+"<body>\n" +
+"<div id=\"chartContainer\" style=\"height: 300px; width: 100%;\"></div>\n" +
+"<script src=\"https://canvasjs.com/assets/script/canvasjs.min.js\"></script>\n" +
+" <p> <strong> Bestnote </strong> </p>\n" +
+"	 <p>die beste Note ist:"+bestnote+"   </p>\n" +
+"</body>\n" +
+"</html>";
+        
+        File f = new File("graficobar.html");
+     try {
+         BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+     bw.write(html);
+     bw.close();
+     } catch (IOException e) {
+      e.printStackTrace();
+        
+     }
+    }
+    
+    public static void main(String[] args) {
+      Ubunghaus uno = new  Ubunghaus();
+       
+         
+        
+   String filename= "D:/Users/Home/Desktop/Notenliste.csv/";
+  ////get file
+        int[][] arrayA=new int[readCsv(filename).length-1][2];
+        // get File to array 
+        // array-1 geht alle Nummer ohne matrikel 
+        for(int i=0;i<arrayA.length;i++){ //split Array
+            arrayA[i][0]=Integer.parseInt(readCsv(filename)[(i+1)].split(",")[0]);
+            arrayA[i][1]=Integer.parseInt(readCsv(filename)[(i+1)].split(",")[1]);
+            System.out.println(arrayA[i][0]+"\t"+arrayA[i][1]);                             //zum testen
+        }
+        //array für Notas 1-5
+        int[] Notas=new int[5];
+        Notas=evaluationDistribution(arrayA);
+       
+        
+        
+        for (int j=0;j<Notas.length;j++){
+            System.out.println("Die Note "+(j+1)+"kommt "+(Notas[j])+" mal");       //zum testen
+        }
+        System.out.println();
+        int abi = bestnote(arrayA);
+        System.out.println(" Das beste Ergebnis beträgt: "+abi+" Punkte");
+       uno.HTML(Notas, abi);
+                  
+         int [] logro = new int[5];
+         logro = prozent(Notas);
+                 for (int j=0;j<Notas.length;j++){
+            System.out.println("-\n Die Note "+(j+1)+" hat die "+(Notas[j])+" prozent");       //zum testen
+        }
+    }
+
+    public static String[] readCsv(String filename){
+        String[] array=new String[99];
+        int count=0;
+        try{
+            Scanner sc=new Scanner(new File(filename));
+            while (sc.hasNextLine()){
+                array[count]=sc.nextLine();
+                count++;
+            }
+            sc.close();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+
+        return array;
+    }
+   
+            
+        
+
+    
+    public static int[] evaluationDistribution(int[][] arrayA){
+        int[] Notas={0,0,0,0,0};
+        for(int i=0;i<arrayA.length;i++){
+
+            //Grade 1
+            if(arrayA[i][1]<100&&arrayA[i][1]>87){
+                Notas[0]=Notas[0]+1;
+            }
+            //Grade 2
+            else if(arrayA[i][1]<88&&arrayA[i][1]>72) {
+                Notas[1]=Notas[1]+1;
+            }
+            //Grade 3
+            else if(arrayA[i][1]<73&&arrayA[i][1]>57) {
+                Notas[2]=Notas[2]+1;
+            }
+            //Grade 4
+            else if(arrayA[i][1]<58&&arrayA[i][1]>49) {
+                Notas[3]=Notas[3]+1;
+            }
+            //Grade 5
+            else if(arrayA[i][1]<50) {
+                Notas[4]=Notas[4]+1;
+            }
+        }
+        return Notas;
+    }
+
+    public static int bestnote(int[][] arrayA){
+        int max=0;
+        for(int i=0;i<arrayA.length;i++){
+            if(arrayA[i][1]>max){
+                max=arrayA[i][1];
+            }
+        }
+        return max;
+    }
+}
+   
+
