@@ -1,0 +1,171 @@
+
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.String;
+import java.awt.Desktop;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
+
+/**
+ *
+ * @author Home
+ */
+public class Mahlzeit {
+
+    private String name;
+    private  String beschreibung;
+    private double preice ;
+    private boolean vegetarisch;
+    private String typeoffood;
+
+    public void setTypeoffood(java.lang.String typeoffood) {
+        this.typeoffood = typeoffood;
+    }
+    Mahlzeit(String name, String beschreibung, double preice, String typeoffood){
+     this.name = name;
+     this.beschreibung =  beschreibung;
+     this.preice = preice;
+     this.typeoffood = typeoffood;
+     
+    }
+     Mahlzeit(String name, String beschreibung, double preice, boolean vegetarisch){
+      this.name = name;
+     this.beschreibung =  beschreibung;
+ this.preice = 2.5;
+     this.vegetarisch = vegetarisch;
+     }
+
+    @Override
+    public String toString() {
+        return "Mahlzeit{" + "name=" + name + ", beschreibung=" + beschreibung + ", preice=" + preice + ", vegetarisch=" + vegetarisch + '}';
+    }
+    public String getName() {
+        return name;
+    }
+
+    public String getBeschreibung() {
+        return beschreibung;
+    }
+
+    public double getPreice() {
+        return preice;
+    }
+
+    public boolean isVegetarisch() {
+        return vegetarisch;
+    }
+    
+    public static void main(String[] args) {
+          
+        int student = 0 ;
+        int mitarbeiter =0;
+        int guess = 0;
+        Mahlzeit[][] semana = new Mahlzeit[4][4];
+         semana[0][1] = new Mahlzeit("pasta","pasta mit bolo",2.5,false);
+         semana [0][2] = new Mahlzeit ("ceviche", "fisch mit citronen", 2.5, false);
+         semana [0][3] = new Mahlzeit ("hamburger", "Hamburger mit Pomes", 2.5, false);
+         
+         semana [1][0] = new Mahlzeit("Pasta mit soja bolognese","pasta mit soja", 2.5,true);
+          semana [2][0] = new Mahlzeit("ceviche mit Toffu", "Soja mit citronen", 2.5, true);
+        semana  [3][0]  = new Mahlzeit("hamburger aus Bohnen ", "Hamburger aus Bohnen mit Pomes", 2.5, true);
+        //semana [0] [4] =  new Mahlzeit("wurst", "wurst mit pommes", 2.5, "mit fleisch");
+         
+          System.out.println( "der Student isst pasta das kostet "+gibPreisStudent(student , semana [0][1].preice)+"die plate "+semana[0][1]);
+        System.out.println( "der  mitarbeiter isst pasta das kostet "+gibPreisMitarbeiter(mitarbeiter, semana [0][1].preice)+"die plate");
+       System.out.println( "das Gast  isst pasta das kostet "+gibPreisGast(guess, semana [0][1].preice)+"die plate");
+         
+       String html = "<div><h1>  </h1><p>"+ "<meta charset=\"utf-8\">\n" +
+"  <html>\n" +
+"<head>\n" +
+"<body>"+
+"<h1> <strong> Mahlzeiten für die woche </strong></h1>\n" +
+"<table style= width:100%>\n" +
+  "<tr>\n" +
+    "<th>TAG</th>\n" +
+    "<th>MAHLZEIT 1 </th>\n" +
+    "<th> MAHLZEIT 2  </th>\n" +
+   "<th> BESCHREIBUNG  GERICHT 1 </th>\n"+
+   "<th> BESCHREIBUNG GERICHT 2 </th>\n"+
+    "<th> IST VEGETARISCH?   </th>\n" +
+    "<th>PREICE </th>"+
+  "</tr>"+
+  "<tr>"+
+    "<td><strong> Montag</strong> </td>"+
+    "<td> "+semana[0][1].name+" </td>"+
+    "<td>"+semana[1][0].name+"  </td>"+
+   "<td>"+semana[0][1].beschreibung+"  </td>"+
+   "<td>"+semana[1][0].beschreibung+"  </td>"+
+    "<td>das Gericht "+semana[1][0].name+"ist "+semana[1][0].vegetarisch+"</td>"+
+    "<td>"+semana[0][1].preice+"E</td>"+
+  "</tr>"+
+               
+  "<tr>"+
+    "<td> <strong> Dienstag </strong> </td>"+
+    "<td> "+semana[0][2].name+" </td>"+
+    "<td>"+semana[2][0].name+"  </td>"+
+               "<td>"+semana[0][2].beschreibung+"  </td>"+
+   "<td>"+semana[2][0].beschreibung+"  </td>"+
+    "<td>das Gericht "+semana[2][0].name+"ist "+semana[2][0].vegetarisch+"</td>"+
+    "<td>"+semana[0][1].preice+"E</td>"+
+  "</tr>"+
+  "<tr>"+
+  "<tr>"+
+    "<td> <strong> mittwoch </strong> </td>"+
+    "<td> "+semana[0][3].name+" </td>"+
+    "<td>"+semana[3][0].name+"  </td>"+
+               "<td>"+semana[0][3].beschreibung+"  </td>"+
+   "<td>"+semana[3][0].beschreibung+"  </td>"+
+    "<td>das Gericht "+semana[3][0].name+"ist "+semana[3][0].vegetarisch+"</td>"+
+    "<td>"+semana[0][1].preice+"E</td>"+
+  "</tr>"+
+  "<tr>"+              
+"</table>"+
+"<p> der Preis in der tabelle ist"+semana[0][1].preice+"und gilt nur für Studenten    </p>"+
+"<P> der preis für mitarbeter  ist "+gibPreisMitarbeiter(mitarbeiter, semana [0][1].preice)+"</p>"+
+"<P> Dder Preis für gasss  ist"+gibPreisGast(guess, semana [0][1].preice)+ "</p>"+
+"</body>"+      
+"</html>";
+       
+          File f = new File("semana.html");
+     try {
+         BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+     bw.write(html);
+     bw.close();
+     } catch (IOException e) {
+      e.printStackTrace();
+        
+     }
+     try{
+         
+            String path= "semana.html";
+            File file=  new File(path);
+           
+            if(file.exists()){
+              System.out.print("file does exist");
+              /*Process pro= Runtime.getRuntime().exec("rund1132 url.d11, FileProtocolHandler"+path);
+               pro.waitFor();*/
+              Desktop.getDesktop().open(file);
+            }else{
+                System.out.print("file does not exist");
+                
+            }
+            }catch(Exception e){
+              System.out.print(e);   
+            }
+    }
+   static double gibPreisStudent( int  student, double preice ){
+       preice = 2.5;
+       
+    return preice;}
+   
+    static double  gibPreisMitarbeiter(int mitarbeiter,  double preice){ 
+  preice = preice + 2.0;   
+return preice;
+    }
+    static double  gibPreisGast(int guess, double preice){
+    
+    preice = preice + 2.5;
+    
+   return preice; }
+}
