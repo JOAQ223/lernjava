@@ -1,0 +1,291 @@
+package hausubung2;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Home
+ */
+public class Studentenverwaltung  {
+
+
+     //arraylist von studenten // 
+    ArrayList <studenten> haus_ubung = new ArrayList();
+    ///get durch alle Studenten und dann print // 
+    
+
+ 
+ 
+ 
+ 
+ public static studenten addStudenten (  String Name, String Vorname ,int MatrNr, int noteOOP, int noteNTG , int noteGDI, int notRechnnernetzte , int Mate){
+
+ ArrayList<Prüfungsleistung> HU2 = new ArrayList<Prüfungsleistung>();
+ HU2.add(new Prüfungsleistung("OOP", "Bienhaus",noteOOP));
+ HU2.add(new Prüfungsleistung( "NTG", "Welzel", noteNTG));
+ HU2.add(new Prüfungsleistung("Grundlagen der Informatik", "Herzberg",noteGDI));
+ HU2.add(new Prüfungsleistung( "Rechnernetze", "Maier", notRechnnernetzte));
+ HU2.add(new Prüfungsleistung("Mathematik", "Just", Mate));
+
+studenten student = new studenten(MatrNr , Name , Vorname , HU2);
+return student; }
+ 
+ /**  we take the students als Parameter*/
+ 
+ public static void  writeAll  (studenten Karla, studenten Martin, studenten Dann, studenten Milagros, studenten Joaquin) { 
+  //(ArrayList estudiantes ){
+     //Karla.toString()+Karla.getMedia()+Karla.getfail()+"\n--------------------------\n\n";
+    ArrayList <studenten> estudiantes = new ArrayList();
+   estudiantes.add(Karla);
+   estudiantes.add(Dann);
+   estudiantes.add(Martin);
+   estudiantes.add(Milagros);
+   estudiantes.add(Joaquin);
+String tabelle="";
+
+ for(int i = 0; i<estudiantes.size() ;i++){ 
+tabelle =tabelle+estudiantes.get(i).toString()+"\n"+estudiantes.get(i).getMedia()+"\n"+estudiantes.get(i).getfail();
+           
+i++;
+ }
+ System.out.print(tabelle);
+try{ 
+
+  FileWriter writer = new FileWriter("Informatik_Sommersemester_2020.txt");
+    
+  writer.write("");
+  System.out.print("file was writend");
+             writer.write(tabelle);
+            writer.write("\r\n");   // write new line
+            writer.write("s");
+            writer.close();
+ }catch(Exception e ){
+     
+ System.out.print("file not created "+e);
+ }
+}
+}
+ // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+ package hausubung2;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Home
+ */
+public class Prüfungsleistung  {
+     
+     
+     String Modul;
+String Prufer; 
+double Ergebnis;
+ /**               I write all the Variables from the Prüfungsleistung , Modul , name , Ergebnis        */
+    @Override
+    public String toString() {
+        return "\n \n" + "\nModul:" + Modul + "\n Prufer:" + Prufer + "\n Ergebnis:" + Ergebnis + "";
+         /**              I make the 3  Varaible in TOString and make the \n to change it to the style from the model       */
+    }
+      /**  here i have the get and Set Methode */
+    public String getModul() {
+        return Modul;
+        
+    }
+
+    public String getPrufer() {
+        return Prufer;
+    }
+
+    public double getErgebnis() {
+        return Ergebnis;
+    }
+     
+     
+    /**
+     *CONSTRUCTOR   to work in the Array
+     * @param Modul
+     * @param Prufer
+     * @param Ergebnis
+     */
+    public Prüfungsleistung(String Modul, String Prufer , double Ergebnis){
+   this.Ergebnis = Ergebnis; 
+   this.Modul = Modul;
+   this.Prufer = Prufer;
+    
+    }
+        
+        
+    }
+     
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+package hausubung2;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+/**
+ *
+ * @author Home
+ */
+public class studenten  extends Studentenverwaltung{
+     private int MatrNr;
+    private String Name;
+    private String Vorname;
+     public   ArrayList <Prüfungsleistung> HU2;
+
+    
+
+ 
+    public ArrayList<Prüfungsleistung> getHU2() {
+        return HU2;
+    }
+
+    public void setHU2(ArrayList<Prüfungsleistung> HU2) {
+        this.HU2 = HU2;
+    }
+       
+    
+
+    public int getMatrNr() {
+        return MatrNr;
+    }
+
+    public void setMatrNr(int MatrNr) {
+        this.MatrNr = MatrNr;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public String getVorname() {
+        return Vorname;
+    }
+
+    public void setVorname(String Vorname) {
+        this.Vorname = Vorname;
+    }
+
+    public studenten (int MatrNr, String Name, String Vorname, ArrayList HU2) {
+        this.MatrNr = MatrNr;
+        this.Name = Name;
+        this.Vorname = Vorname;
+        this.HU2 = HU2;
+    }
+
+    /**
+     *
+     * @return
+     */
+  
+    
+    public String getMedia(){
+       String mediana;
+
+        double media =0;
+        int failed =0;
+       int meanInt=0;
+       
+       int suma=0;
+       for (int i =0;i<getHU2().size();i++){
+             if(getHU2().get(i).getErgebnis()>=50){
+            suma=(int) (getHU2().get(i).getErgebnis() + suma);
+ 
+             }
+       else{
+                  failed++;   
+                     }
+       media = suma / (getHU2().size() - failed);
+       
+       }
+       mediana = "Durchschnitt \t \t"+media+" \n";
+
+       return mediana;}
+    
+    public String getfail(){
+int failed=0;
+for(int i =0;i< getHU2().size(); i++){
+if(getHU2().get(i).getErgebnis()<50){
+    failed++;}
+    } 
+    String fail= "Nicht bestanden Prufungen sind \t"+failed+"\n" ;
+return fail;
+}
+
+    
+    
+    @Override
+     public String toString() {
+        String results= " ";
+         for (int i = 0; i < this.HU2.size(); i++) {
+              
+            results += " " + this.HU2.get(i).toString();
+        }
+        
+        return "\n-------------\n"+ "MatrNr: " + MatrNr + "\n Name:" + Name + "\n Vorname:" + Vorname + "\n Prüfungsleistungen: " +results+"\n";
+
+ 
+   
+       
+    
+}
+
+    /*public  String toString(){
+    String docString = HU2.toString().replace(",","").replace("[",  "").replace("]", "");
+    return  "\nStudent:"+ "\n\nMatrikelnummer: "+MatrNr+
+    "\nName:"+Name+"\nVorname:" +Vorname+"\n------\n\nPrüfungsleistungen:"+"\n"+docString+ "\n";
+    }*/
+    public static void main(String[] args) {
+    }
+   
+ public void addPrufung (String Modul , String Prüfer, double Ergebnis){
+
+ 
+     Prüfungsleistung Studnete1  = new Prüfungsleistung(Modul, Prüfer , Ergebnis);
+      this.HU2.add(Studnete1);
+ }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+package hausubung2;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Home
+ */
+public class hauptprogramm {
+
+    /**
+     * @param args the command line arguments
+     */
+    /**  here  i add all the Studenten  with the addStudenten */
+    public static void main(String[] args) {
+        studenten Karla = Studentenverwaltung.addStudenten("Karla", "Regenwald",71210,80,88,70,100,90);
+         studenten Martin = Studentenverwaltung.addStudenten("Martin", "Muller",34570,40,48,40,50,80);
+         studenten Dann = Studentenverwaltung.addStudenten("Dann", "Stein",22341,80,78,90,80,80);
+         studenten Milagros = Studentenverwaltung.addStudenten("Milagros", "Rothwein",23430,80,38,40,70,85);
+       studenten Joaquin = Studentenverwaltung.addStudenten("Joaquin", "Schneider",25674,80,78,70,90,85);
+    
+      /* ArrayList <studenten> estudiantes = new ArrayList();
+   estudiantes.add(Karla);
+   estudiantes.add(Dann);
+   estudiantes.add(Martin);
+   estudiantes.add(Milagros);
+   estudiantes.add(Joaquin);
+        Studentenverwaltung.writeAll(estudiantes);*/
+       Studentenverwaltung.writeAll(Karla, Martin , Dann, Milagros , Joaquin);
+      
+    }
+    
+}
