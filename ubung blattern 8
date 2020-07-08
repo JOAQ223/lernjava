@@ -1,0 +1,236 @@
+package ubung.pkg8;
+
+/**
+ *
+ * @author Home
+ */
+public abstract class MedienProdukte  {
+  protected String Description;
+
+    public MedienProdukte(String Description) {
+        this.Description = Description;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
+    }
+
+    
+  
+   
+    
+}
+
+/** next class*/
+
+package ubung.pkg8;
+
+/**
+ *
+ * @author Home
+ */
+public interface liesbar {
+      public int  read(int page);
+    
+}
+
+/** next clas*/
+
+package ubung.pkg8;
+
+/**
+ *
+ * @author Home
+ */
+public class Book extends MedienProdukte implements liesbar  {
+ public String Autor;
+ public int ID;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+    public Book(int ID ,String Autor, String Description  ) {
+        super(Description);
+        this.Autor = Autor;
+        this.ID = ID;
+        
+    /**
+     *
+     * @param page
+     */
+    
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" + "Autor=" + Autor + ", Pages=" + ID + '}';
+    }
+
+    
+
+    public String getAutor() {
+        return Autor;
+    }
+
+    public void setAutor(String Autor) {
+        this.Autor = Autor;
+    }
+
+    @Override
+    public int read(int page) {
+        
+    return page;}
+   
+}
+
+/** next class*/
+
+package ubung.pkg8;
+
+/**
+ *
+ * @author Home
+ */
+public class DVD extends MedienProdukte  implements hortbar  {
+public int ID;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+    public DVD(int ID, String Description) {
+        super(Description);
+        this.ID = ID;
+        
+    }
+
+    @Override
+    public String toString() {
+        return "DVD{" + "Nummer=" + ID + '}';
+    }
+
+    
+
+    @Override
+    public String hear(int minute) {
+        String gehört;
+        gehört= "sounds";
+    return gehört;}
+    
+
+}
+  
+  /** next class*/
+  
+  package ubung.pkg8;
+
+/**
+ *
+ * @author Home
+ */
+public class Zeitung extends Book  implements liesbar {
+
+    public Zeitung(int ID, String Autor, String Description) {
+        super(ID, Autor, Description);
+    }
+    
+   
+    
+     public int read (int page) {
+        
+    return page;}
+    
+    }
+    
+
+/** next class*/
+
+ckage ubung.pkg8;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Home
+ */
+public class MediaManager {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       	Book metz = new Book(4711, "Metz", "Mathematik leicht gemacht");
+DVD natKingCole = new DVD(4712, "Nat King Cole");
+MusicDownload dl = new MusicDownload(4713, "https://www.youtube.com/watch?v=Dha584PG514");
+
+ArrayList<MedienProdukte> myMedia = new ArrayList<MedienProdukte>();
+
+myMedia.add(natKingCole);
+myMedia.add(metz);
+myMedia.add(dl);
+
+for(MedienProdukte mp: myMedia) {
+System.out.println(mp.getDescription());
+}
+
+System.out.println(metz.getDescription() + ": " + metz.read(10));
+System.out.println(natKingCole.getDescription() + ": " + natKingCole.hear(11));
+System.out.println( dl.hear(1));
+
+    }
+    
+}
+
+
+
+/** next class*/
+
+
+
+* @author Home
+ */
+public class MusicDownload extends  MedienProdukte implements hortbar {
+ private int ID;
+
+    @Override
+    public String toString() {
+        return "MusicDownload{" + "ID=" + ID + '}';
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+    public MusicDownload(int ID, String Description) {
+        super(Description);
+        this.ID = ID;
+    }
+
+    @Override
+    public String hear(int minute) {
+      
+        String gehört;
+        gehört= "sounds";
+    return gehört;}
+    
+    }
+
+
+
+
+    
+
