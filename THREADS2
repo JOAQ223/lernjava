@@ -1,0 +1,90 @@
+public class Process extends Thread {
+ public char alphabet = 'a';
+
+    public Process(){
+        this.alphabet =alphabet;
+    }
+    @Override
+    public void run(){
+
+
+            for (int i = 0; i < 26; i++) {
+
+                System.out.print(alphabet);
+                alphabet++;
+
+            try {
+                Process.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.println("error clase1"+e);
+            }
+        }
+    }
+
+}
+
+public class process2 extends Thread {
+
+    public char alphabet = 'a';
+
+    public process2(){
+        this.alphabet =alphabet;
+    }
+    @Override
+    public void run(){
+
+
+        for (int i = 0; i < 26; i++) {
+            char a = Character.toUpperCase(alphabet);
+            System.out.print(a);
+            alphabet++;
+            try {
+                process2.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.println("error clase1"+e);
+            }
+        }
+    }
+}
+public class main {
+
+    public static void main(String[] args){
+ Process a = new Process();
+process2 b = new process2();
+
+
+        a.start(); //first
+       try {
+            a.sleep(10);//pause the thread 1 for 1 milisecond and then  will continue wenn thread 2 gemacht wurde
+
+        } catch (InterruptedException e) {
+            System.out.print("error hilo1" +e);
+       }
+            b.start();//Seconds
+        try {
+            b.sleep(10);
+
+        } catch (InterruptedException e) {
+            System.out.print("error hilo2" +e);
+        }
+          /** c.start();//firth
+        try {
+            c.sleep(10);
+
+        } catch (InterruptedException e) {
+            System.out.println("error hilo3" +e);
+        }
+
+           d.start();
+
+
+
+        try {
+            d.sleep(10);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }*/
+    }
+}
