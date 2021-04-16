@@ -1,0 +1,87 @@
+import processing.core.PApplet;
+import processing.core.PGraphics;
+import java.util.Timer;
+public class pong3 {
+
+
+    public static class creategame extends PApplet {
+        float x, y, speedX, speedY;
+        float diam = 20;
+        float rectSize = 100;// lange from Palet
+        int score = 0;
+
+        Timer timer = new Timer();
+        public void settings() {
+            //fullScreen();//set screen fullsize
+             size(900,800);
+            reset();
+        }
+
+        public void reset() {
+            x = width/2; //middle from screen
+            y = height/2;
+            speedX = random(2, 4);
+            speedY = random(2, 4);
+        }
+
+        public void draw() {
+             // background(random(255),random(255),random(255));
+                   background( 0);
+
+                   fill(random(255),random(255),random(255));
+            ellipse(x, y, diam, diam);// produce ball
+
+            rect(0, 0, 15, height);//wall link side
+            rect(width-30, mouseY-rectSize/2, 10, rectSize);//wall rechs side
+            x += speedX;
+            y += speedY;
+
+            float time = (25f-millis()/1000f);
+            String  a = "try to play against the wall | your score:"+score+".0  time left:"+time;;
+            text(a , 20, 15);
+
+            // if ball hits movable bar, invert X direction
+            if ( x > width-30 && x < width -20 && y > mouseY-rectSize/2 && y < mouseY+rectSize/2 ) {
+                speedX = speedX * -1; // rebote ball
+                score++;
+
+                text(a , 10, 15);
+
+            }
+
+            // if ball hits wall, change direction of X
+            if (x < 25) {
+                speedX *= -1.1;
+                speedY *= 1.1;
+                x += speedX;
+            }
+
+
+            // if ball hits up or down, change direction of Y
+            if ( y > height || y < 0 ) {
+                speedY *= -1;
+            }
+            ///set timer when timer null than stop game or ball outside canvas
+     if(x> width|| time<0){
+         String endgame = " schade, game over your score is:"+score;
+         textSize(15);
+         a= "try to play against the wall | your score:"+score+".0  time left:0.00";;
+         text(endgame ,width/2,height/2);
+         //background(random(255),random(255),random(255));
+
+    }
+
+        }
+
+       public void mousePressed() {
+
+            reset();
+        }
+
+        public static void main(String[] args) {
+            String[] appArgs = {"pongs"};
+           creategame games = new creategame();
+            PApplet.runSketch(appArgs, games);
+        }
+    }
+}
